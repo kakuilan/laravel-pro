@@ -14,7 +14,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "kakuilan/php-helper": "^0.2.0",
         "laravel/framework": "^8.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
