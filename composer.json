@@ -15,6 +15,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "jenssegers/agent": "^2.6",
         "kakuilan/php-helper": "^0.2.0",
+        "laravel-lang/lang": "~7.0",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "tymon/jwt-auth": "^1.0"
