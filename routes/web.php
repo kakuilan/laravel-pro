@@ -13,13 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', App\Http\Controllers\Frontend\HomeController::class.'@index');
+Route::get('/welcome', function () {
     return view('welcome');
 });
-Route::get('foo', function () {
+Route::get('hello', function () {
     return 'Hello World';
 });
 Route::match(['get', 'post', 'put'], 'time', function () {
     return date('Y-m-d H:i:s');
 });
-Route::get('/user', 'UserController@index');
+//Route::get('/user', 'UserController@index');
