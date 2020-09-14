@@ -6,7 +6,8 @@
 </head>
 <body>
     <p>
-        {{$name}}，现在是{{$date}}
+        {{$name}}，现在是{{$date}}。<br/>
+        来自{{ $url }}
     </p>
 </body>
 </html>

@@ -34,12 +34,22 @@ Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {
     return "post:{$postId},comment:{$commentId}";
 });
 //可选参数
-Route::get('user/{name?}', function ($name = 'John') {
+Route::get('user1/{name?}', function ($name = 'John') {
     return $name;
 });
 //正则限制参数
 Route::get('user2/{name}', function ($name) {
     return $name;
 })->where('name', '[A-Za-z]+');
+//路由命名
+Route::get('users/profile', function () {
+    $data = [
+        'name' => '',
+        'date' => '',
+        'url' => route('profile'), //生成URL
+    ];
+    return view('routeview', $data);
+})->name('profile');
+
 
 
