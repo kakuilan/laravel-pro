@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', App\Http\Controllers\Frontend\HomeController::class.'@index');
+Route::any('/', App\Http\Controllers\Frontend\HomeController::class.'@index');
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -24,3 +24,9 @@ Route::match(['get', 'post', 'put'], 'time', function () {
     return date('Y-m-d H:i:s');
 });
 //Route::get('/user', 'UserController@index');
+
+//重定向
+Route::redirect('/index', '/', 301);
+//视图路由
+Route::view('/routeview', 'routeview', ['name'=>'ZhangSan', 'date'=>date('Y-m-d H:i:s')]);
+

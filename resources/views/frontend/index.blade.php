@@ -6,5 +6,10 @@
 </head>
 <body>
     <h2>Home,Index</h2>
+    <div>
+        <form method="POST" action="/">
+            {{ csrf_field() }}
+        </form>
+    </div>
 </body>
 </html>
