@@ -10,6 +10,7 @@
     <h3>表单</h3>
     <form method="POST" action="/formrec">
         @csrf
+        <input type="hidden" name="global" value="{{$global}}">
         姓名：<input type="text" name="name"><br/>
         年龄：<input type="text" name="age"><br/>
         <input type="submit" value="提交">

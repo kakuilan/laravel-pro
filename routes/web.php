@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -17,7 +18,7 @@ use Illuminate\Http\Response;
 |
 */
 
-Route::any('/', App\Http\Controllers\Frontend\HomeController::class.'@index');
+Route::any('/', App\Http\Controllers\Frontend\HomeController::class . '@index');
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -32,7 +33,7 @@ Route::match(['get', 'post', 'put'], 'time', function () {
 //重定向
 Route::redirect('/index', '/', 301);
 //视图路由
-Route::view('/routeview', 'routeview', ['name'=>'ZhangSan', 'date'=>date('Y-m-d H:i:s')]);
+Route::view('/routeview', 'routeview', ['name' => 'ZhangSan', 'date' => date('Y-m-d H:i:s')]);
 //必填参数
 Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {
     return "post:{$postId},comment:{$commentId}";
@@ -50,7 +51,7 @@ Route::get('users/profile', function () {
     $data = [
         'name' => '',
         'date' => '',
-        'url' => route('profile'), //生成URL
+        'url'  => route('profile'), //生成URL
     ];
     return view('routeview', $data);
 })->name('profile');
@@ -69,12 +70,12 @@ Route::get('uage/{age?}', function ($age = 20) {
 Route::view('/form', 'form');
 Route::any('/formrec', function (Request $request) {
     $arr = [
-        'path' => $request->path(),
-        'url' => $request->url(),
-        'furl' => $request->fullUrl(),
-        'post' => $request->post(),
-        'method' => $request->method(),
-        'all' => $request->all(),
+        'path'    => $request->path(),
+        'url'     => $request->url(),
+        'furl'    => $request->fullUrl(),
+        'post'    => $request->post(),
+        'method'  => $request->method(),
+        'all'     => $request->all(),
         'status1' => $request->old('status'),
         'status2' => session('status'),
     ];
@@ -101,7 +102,7 @@ Route::resource('photos', App\Http\Controllers\PhotoController::class);
 Route::get('/jsontest', function (Request $request) {
     $arr = [
         'name' => $request->input('user.name'),
-        'qry' => $request->query(),
+        'qry'  => $request->query(),
     ];
     return json_encode($arr);
 });
@@ -119,18 +120,18 @@ Route::get('/cookies', function (Request $request, Response $response) {
 
 // 上传
 Route::post('/upload', function (Request $request, Response $response) {
-    $img = $request->file('img');
+    $img   = $request->file('img');
     $file1 = [
-        'ext' => $img->extension(),
+        'ext'  => $img->extension(),
         'path' => $img->store('images'),
-        'ok' => $img->isValid(),
+        'ok'   => $img->isValid(),
     ];
 
     $photo = $request->photo;
     $file2 = [
-        'ext' => $photo->extension(),
+        'ext'  => $photo->extension(),
         'path' => $photo->store('images'),
-        'ok' => $photo->isValid(),
+        'ok'   => $photo->isValid(),
     ];
 
     $arr = [
@@ -147,7 +148,7 @@ Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function (
         return date('Y-m-d H:i:s');
     });
     Route::get('terms', function () {
-        return  date('Y-m-d H:i:s');
+        return date('Y-m-d H:i:s');
     });
 });
 
@@ -163,7 +164,11 @@ Route::get('download/stream', function () {
     }, 'test.md');
 });
 
-
+// 创建视图
+Route::get('view/make', function () {
+    $data = [];
+    return View::first(['form', 'admin'], $data);
+});
 
 
 
