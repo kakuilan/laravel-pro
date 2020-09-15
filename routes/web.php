@@ -156,6 +156,13 @@ Route::get('redirect/flash', function () {
     return redirect('formrec')->with('status', 'old data value.');
 });
 
+// 流下载
+Route::get('download/stream', function () {
+    return response()->streamDownload(function () {
+        echo file_get_contents(__FILE__);
+    }, 'test.md');
+});
+
 
 
 
