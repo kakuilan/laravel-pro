@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,4 +61,10 @@ Route::get('usr/{user}', function (App\Models\User $user) {
 Route::get('uage/{age?}', function ($age = 20) {
     return $age;
 })->middleware('checkage');
+
+//表单
+Route::view('/form', 'form');
+Route::post('/formrec', function (Request $request) {
+    return json_encode($request->post());
+});
 
