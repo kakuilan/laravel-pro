@@ -113,3 +113,31 @@ Route::get('/cookies', function (Request $request, Response $response) {
         'cook1', 'value', 500
     );
 });
+
+// 上传
+Route::post('/upload', function (Request $request, Response $response) {
+    $img = $request->file('img');
+    $file1 = [
+        'ext' => $img->extension(),
+        'path' => $img->store('images'),
+        'ok' => $img->isValid(),
+    ];
+
+    $photo = $request->photo;
+    $file2 = [
+        'ext' => $photo->extension(),
+        'path' => $photo->store('images'),
+        'ok' => $photo->isValid(),
+    ];
+
+    $arr = [
+        'file1' => $file1,
+        'file2' => $file2,
+    ];
+
+    return json_encode($arr);
+});
+
+
+
+
