@@ -67,13 +67,16 @@ Route::get('uage/{age?}', function ($age = 20) {
 
 //表单
 Route::view('/form', 'form');
-Route::post('/formrec', function (Request $request) {
+Route::any('/formrec', function (Request $request) {
     $arr = [
         'path' => $request->path(),
         'url' => $request->url(),
         'furl' => $request->fullUrl(),
         'post' => $request->post(),
         'method' => $request->method(),
+        'all' => $request->all(),
+        'status1' => $request->old('status'),
+        'status2' => session('status'),
     ];
     return json_encode($arr);
 });
@@ -146,6 +149,11 @@ Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function (
     Route::get('terms', function () {
         return  date('Y-m-d H:i:s');
     });
+});
+
+// 重定向并传输数据
+Route::get('redirect/flash', function () {
+    return redirect('formrec')->with('status', 'old data value.');
 });
 
 
