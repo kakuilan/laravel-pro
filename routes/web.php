@@ -1,7 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -65,7 +68,14 @@ Route::get('uage/{age?}', function ($age = 20) {
 //表单
 Route::view('/form', 'form');
 Route::post('/formrec', function (Request $request) {
-    return json_encode($request->post());
+    $arr = [
+        'path' => $request->path(),
+        'url' => $request->url(),
+        'furl' => $request->fullUrl(),
+        'post' => $request->post(),
+        'method' => $request->method(),
+    ];
+    return json_encode($arr);
 });
 
 //单行为控制器
@@ -83,3 +93,23 @@ Route::resource('photos', App\Http\Controllers\PhotoController::class);
 //PUT/PATCH /photos/{photo} 	update 	photos.update
 //DELETE 	/photos/{photo} 	destroy photos.destroy
 
+// JSON input
+// {"user":{"name":"Li4","age":20},"list":[]}
+Route::get('/jsontest', function (Request $request) {
+    $arr = [
+        'name' => $request->input('user.name'),
+        'qry' => $request->query(),
+    ];
+    return json_encode($arr);
+});
+
+// cookie
+Route::get('/cookies', function (Request $request, Response $response) {
+    $arr = [
+        'cook1' => $request->cookie('cook1'),
+        'cook2' => Cookie::get('cook2'),
+    ];
+    return response(json_encode($arr))->cookie(
+        'cook1', 'value', 500
+    );
+});
