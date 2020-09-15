@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -169,6 +170,24 @@ Route::get('view/make', function () {
     $data = [];
     return View::first(['form', 'admin'], $data);
 });
+
+//带签名的URL
+Route::get('url/make', function () {
+    $url = URL::temporarySignedRoute(
+        'unsubscribe', now()->addMinutes(30), ['user' => 5]
+    );
+    $data = [
+        'url' => $url
+    ];
+    return view('urlmake', $data);
+});
+Route::get('/unsubscribe/{user}', function (Request $request, $user) {
+    if (! $request->hasValidSignature()) {
+        abort(401);
+    }
+
+    return $user;
+})->name('unsubscribe');
 
 
 
