@@ -68,3 +68,6 @@ Route::post('/formrec', function (Request $request) {
     return json_encode($request->post());
 });
 
+//单行为控制器
+Route::get('showprofile', App\Http\Controllers\ShowProfile::class);
+
