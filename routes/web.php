@@ -71,3 +71,15 @@ Route::post('/formrec', function (Request $request) {
 //单行为控制器
 Route::get('showprofile', App\Http\Controllers\ShowProfile::class);
 
+//资源路由
+Route::resource('photos', App\Http\Controllers\PhotoController::class);
+//隐含的路由
+//HTTP方法 	    URI 	        动作 	路由名称
+//GET 	    /photos 	        index 	photos.index
+//GET 	    /photos/create 	    create 	photos.create
+//POST 	    /photos 	        store 	photos.store
+//GET 	    /photos/{photo} 	show 	photos.show
+//GET 	    /photos/{photo}/edit edit 	photos.edit
+//PUT/PATCH /photos/{photo} 	update 	photos.update
+//DELETE 	/photos/{photo} 	destroy photos.destroy
+
