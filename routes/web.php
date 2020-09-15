@@ -135,8 +135,20 @@ Route::post('/upload', function (Request $request, Response $response) {
         'file2' => $file2,
     ];
 
-    return json_encode($arr);
+    return $arr;
 });
+
+//缓存中间件
+Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function () {
+    Route::get('privacy', function () {
+        return date('Y-m-d H:i:s');
+    });
+    Route::get('terms', function () {
+        return  date('Y-m-d H:i:s');
+    });
+});
+
+
 
 
 
