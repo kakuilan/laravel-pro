@@ -186,7 +186,14 @@ Route::get('/unsubscribe/{user}', function (Request $request, $user) {
         abort(401);
     }
 
-    return $user;
+    $data = [
+        'usr' => $user,
+        'url1' => action(App\Http\Controllers\PhotoController::class .'@index'),
+        'url2' => action([App\Http\Controllers\PhotoController::class, 'index']),
+        'url3' => action(App\Http\Controllers\PhotoController::class. '@show', ['photo'=>4]),
+    ];
+
+    return $data;
 })->name('unsubscribe');
 
 
