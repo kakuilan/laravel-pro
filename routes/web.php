@@ -51,5 +51,13 @@ Route::get('users/profile', function () {
     return view('routeview', $data);
 })->name('profile');
 
+//路由模型绑定
+Route::get('usr/{user}', function (App\Models\User $user) {
+    return $user->email;
+});
 
+//年龄中间件
+Route::get('uage/{age?}', function ($age = 20) {
+    return $age;
+})->middleware('checkage');
 
